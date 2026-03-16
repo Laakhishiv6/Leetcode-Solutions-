@@ -1,0 +1,37 @@
+Leetcode-2535.-Difference-Between-Element-Sum-and-Digit-Sum-of-an-Array
+Description
+You are given a positive integer array nums.
+
+The element sum is the sum of all the elements in nums. The digit sum is the sum of all the digits (not necessarily distinct) that appear in nums. Return the absolute difference between the element sum and digit sum of nums.
+
+Note that the absolute difference between two integers x and y is defined as |x - y|.
+
+Solution
+Lets consider an example :
+
+Example 1:
+
+Input: nums = [1,15,6,3]
+
+Output: 9
+
+In this given example The element sum of nums array which is 1 + 15 + 6 + 3 = 25 and the digit sum of nums array is 1 + 1 + 5 + 6 + 3 = 16
+
+By finding the element sum and the digit sum we can find the absolute difference between them which is |25 - 16| = 9.
+
+An element sum can be simply found out by summing up the elements in nums.
+
+Meanwhile for digit sum we need to find out each number's digit and add them . For this we can firstly loop through each element, then we can convert each element to a string and store it in an iterator named digit . Then in order to find the sum we can convert that digit string variable into an int type and finally add it to the sum.
+
+Code
+class Solution:
+
+def differenceOfSum(self, nums: List[int]) -> int:
+    element_sum = sum(nums)
+    digit_sum = 0
+    
+    for num in nums:
+        for digit in str(num):  # break number into digits
+            digit_sum += int(digit)
+    
+    return abs(element_sum - digit_sum)
