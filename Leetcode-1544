@@ -1,0 +1,75 @@
+Leetcode-1544.-Make-The-String-Great
+Description
+Given a string s of lower and upper case English letters.
+
+A good string is a string which doesn't have two adjacent characters s[i] and s[i + 1] where:
+
+0 <= i <= s.length - 2 s[i] is a lower-case letter and s[i + 1] is the same letter but in upper-case or vice-versa. To make the string good, you can choose two adjacent characters that make the string bad and remove them. You can keep doing this until the string becomes good.
+
+Return the string after making it good. The answer is guaranteed to be unique under the given constraints.
+
+Notice that an empty string is also good.
+
+Solution
+In the given problem we have been given a string s and we need to eliminate the adjacent characters which are either uppercase and lowercase or vice versa.
+
+This can be done using stack .
+
+In ASCII, the difference between lowercase and uppercase of the same letter is exactly 32.
+
+'a' → 97, 'A' → 65 → difference = 32
+
+'b' → 98, 'B' → 66 → difference = 32
+
+ord() function in python: It converts a single character into its ASCII (or Unicode) numeric value.
+
+abs() function in python : It returns the positive value of a number, ignoring the sign.
+
+Example 1:
+
+Input: s = "leEeetcode"
+
+Output: "leetcode"
+
+Explanation: In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode".
+
+Example 2:
+
+Input: s = "abBAcC"
+
+Output: ""
+
+Explanation: We have many possible scenarios, and all lead to the same answer. For example:
+
+"abBAcC" --> "aAcC" --> "cC" --> ""
+
+"abBAcC" --> "abBA" --> "aA" --> ""
+
+Algorithm
+Create a stack
+Loop through each character in the string
+Check if there exists a stack and if the ascii values of the current character and its previous character have a ascii difference of 32 .
+If they do then pop the previous element out .
+Else append the character .
+Return the string by using .join method.
+Code
+class Solution:
+
+def makeGood(self, s: str) -> str:
+
+    stack = []
+    for char in s:
+        if stack and abs(ord(char) - ord(stack[-1])) == 32:
+            stack.pop()
+
+        else:
+            stack.append(char)
+    return "".join(stack)
+Complexity
+Time Complexity:
+
+O(n) — Each character is pushed and popped at most once.
+
+Space Complexity:
+
+O(n) — Stack stores at most all characters.
