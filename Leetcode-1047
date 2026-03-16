@@ -1,0 +1,55 @@
+Leetcode-1047.-Remove-All-Adjacent-Duplicates-In-String
+Description
+You are given a string s consisting of lowercase English letters. A duplicate removal consists of choosing two adjacent and equal letters and removing them.
+
+We repeatedly make duplicate removals on s until we no longer can.
+
+Return the final string after all such duplicate removals have been made. It can be proven that the answer is unique.
+
+Solution
+Given a string s, repeatedly remove pairs of adjacent duplicates until no more can be removed. Return the final string after all such operations.
+
+This question can be implemented using stack . Since a duplicate can have only 2 values , hence we need to compare the value which we currently have the previous value . If they are same it means together they will be forming a duplicate which needs to be eliminated . Hence we will be popping that value.
+
+Example 1:
+
+Input: s = "abbaca"
+
+Output: "ca"
+
+Explanation:
+
+For example, in "abbaca" we could remove "bb" since the letters are adjacent and equal, and this is the only possible move. The result of this move is that the string is "aaca", of which only "aa" is possible, so the final string is "ca".
+
+Example 2:
+
+Input: s = "azxxzy"
+
+Output: "ay"
+
+Algorithm
+Create a stack
+Loop through each character in the stack .
+Check if the current element and the previous element(top of the stack) are the same .
+If they are same then pop element from stack and skip the char.
+If they are not same then append that character to the stack.
+Return the stack in the form of string by using join fuction.
+Code
+class Solution:
+
+def removeDuplicates(self, s: str) -> str:
+    stack=[]
+    for char in s:
+        if stack and char==stack[-1]:
+            stack.pop()
+        else:
+            stack.append(char)
+    return "".join(stack)
+Complexity
+Time Complexity:
+
+O(n) (each character is processed once, push/pop are O(1))
+
+Space Complexity:
+
+O(n) (in worst case, no removals → stack size = n)
