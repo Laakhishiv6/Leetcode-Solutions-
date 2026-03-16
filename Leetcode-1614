@@ -1,0 +1,64 @@
+Leetcode-1614.-Maximum-Nesting-Depth-of-the-Parentheses
+Description
+Given a valid parentheses string s, return the nesting depth of s. The nesting depth is the maximum number of nested parentheses.
+
+Solution
+given a string s, find the maximum nesting depth of parentheses in s.
+
+Example 1:
+
+Input: s = "(1+(2*3)+((8)/4))+1"
+
+Output: 3
+
+Explanation:
+
+Digit 8 is inside of 3 nested parentheses in the string.
+
+Example 2:
+
+Input: s = "(1)+((2))+(((3)))"
+
+Output: 3
+
+Explanation:
+
+Digit 3 is inside of 3 nested parentheses in the string.
+
+Example 3:
+
+Input: s = "()(())((()()))"
+
+Output: 3
+
+Maintain a counter depth = how many '(' are currently open (unmatched). Every time you see '(' you go one level deeper → depth += 1. Every time you see ')' you close one level → depth -= 1.
+
+Track max_depth = the largest value depth ever reaches during the scan. That is the maximum nesting depth.
+
+depth reflects the current nesting level. max_depth records the peak of that nesting.
+
+Algorithm
+Initialize counters: depth = 0 → keeps track of the current nesting depth and max_depth = 0 → stores the maximum depth reached so far.
+Traverse each character in the string s:
+If the character is '(', increase depth by 1
+Update max_depth if depth is greater.
+If the character is ')', decrease depth by 1.
+Return max_depth at the end.
+Code
+class Solution:
+
+def maxDepth(self, s: str) -> int:
+    depth=0
+    max_depth=0
+    for char in s:
+        if char=='(':
+            depth+=1
+            if depth>max_depth:
+                max_depth=depth
+        elif char==')':
+            depth-=1
+    return max_depth
+Complexity
+Time: O(n) — single pass through s.
+
+Space: O(1) — only two integer counters.
