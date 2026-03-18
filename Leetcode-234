@@ -1,0 +1,65 @@
+Leetcode-234.-Palindrome-Linked-List
+Description
+Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+Solution
+In the problem we have been a linked list , and we have to check whether the list is palindromic or not .
+
+A palindrome is a set of numbers that reads the same forwards and backward.
+
+Example 1:
+
+Input: head = [1,2,2,1]
+
+Output: true
+
+Example 2:
+
+Input: head = [1,2]
+
+Output: false
+
+Since this is a linked list , finding palindrome will be slightly difficult hence , we can append all the characters of this linked list to an array . The operations performed in an array will make it easier for us to check whether the given list is a palindrome or not .
+
+Algorithm
+Create an empty array named nums.
+Use while loop until head is not equal to null .
+Append the value of head to nums array.
+Move the head pointer to a position forward.
+Now to check whether the given set of array is palindrome or not , we can use 2 pointer technique .
+Initialise 2 pointers l and r as 0 and len(nums)-1 respectively.
+By using a while loop until l<r . Check whether the value in l pointer is not equal to value in r pointer , then return False.
+Otherwise increment l pointer as l+=1 and r decrement pointer as r-=1.
+Return true if the while loop ends .
+Code
+class Solution:
+
+def isPalindrome(self, head: Optional[ListNode]) -> bool:
+    nums=[]
+    while head:
+        nums.append(head.val)
+        head=head.next
+    
+    l,r=0,len(nums)-1
+    while l<r:
+        if nums[l]!=nums[r]:
+            return False
+        l+=1
+        r-=1
+    return True
+Complexity
+Time complexity:
+
+We use while head: loop which loops through the array and appends the item to an array nums -> O(n)
+
+while l<r: -> This takes O(n)
+
+Overall time complexity : O(n)
+
+Space Complexity:
+
+Use of variables like l , r takes O(1) space complexity
+
+Meanwhile nums[] takes O(n)
+
+Overall : O(n)
