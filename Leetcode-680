@@ -1,0 +1,61 @@
+Leetcode-680.-Valid-Palindrome-II
+Description
+Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+Solution
+We are given a string s. We need to determine whether s can become a palindrome after deleting at most one character. A palindrome is a string that reads the same forward and backward.
+
+Example 1:
+
+Input: s = "aba"
+
+Output: true
+
+Example 2:
+
+Input: s = "abca"
+
+Output: true
+
+Explanation: You could delete the character 'c'.
+
+Example 3:
+
+Input: s = "abc"
+
+Output: false
+
+Intuition:
+
+We use the two-pointer technique: Place one pointer at the start (l) and one at the end (r).
+If all characters match → it’s already a palindrome.
+If a mismatch is found → we are allowed to delete one character, so check two possibilities: Skip the left character or Skip the right character.
+Algorithm
+Start with l = 0, r = len(s) - 1.
+While l < r:If s[l] == s[r], move inward (l++, r--).
+If s[l] != s[r]:
+Try skipping left → check if s[l+1:r+1] is a palindrome.Second index r+1 is exclusive, meaning it stops one before that index
+Try skipping right → check if s[l:r] is a palindrome. s[l:r], it starts at l and goes up to (but not including) r
+If either is palindrome → return True. Else → return False.
+If the loop ends without more than one mismatch → return True.
+Code
+class Solution:
+
+def validPalindrome(self, s: str) -> bool:
+    l,r=0,len(s)-1
+    while l<r:
+        if s[l]!=s[r]:
+            skipL,skipR=s[l+1:r+1],s[l:r]
+            return (skipL==skipL[::-1]) or (skipR==skipR[::-1])
+        l+=1
+        r-=1
+
+    return True
+Complexity
+Time Complexity:
+
+O(n) → we scan through the string once, plus at most one extra palindrome check.
+
+Space Complexity:
+
+O(1) → no extra space except variables
