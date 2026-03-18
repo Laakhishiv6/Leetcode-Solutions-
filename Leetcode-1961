@@ -1,0 +1,58 @@
+Leetcode-1961.-Check-If-String-Is-a-Prefix-of-Array
+Description
+Given a string s and an array of strings words, determine whether s is a prefix string of words.
+
+A string s is a prefix string of words if s can be made by concatenating the first k strings in words for some positive k no larger than words.length.
+
+Return true if s is a prefix string of words, or false otherwise.
+
+Solution
+In the given problem we have been given a string s and an array words , we have to check whether the prefix of words array contains string s contents .
+
+Example 1:
+
+Input: s = "iloveleetcode", words = ["i","love","leetcode","apples"]
+
+Output: true
+
+The prefix of words "i","love","leetcode" is equal to "iloveleetcode", which is why it's true.
+
+Input: s = "iloveleetcode", words = ["apples","i","love","leetcode"]
+
+Output: false
+
+The prefix of words "apples","i","love","leetcode" is not equal to "iloveleetcode", which is why it's false.
+
+Algorithm
+Create an empty string res.
+Now loop through words and add the words in res string .
+Check if the res and s are the same . If they are same then return True.
+If the length of the string res goes beyond the length of s , this means the prefix in words is not equal to s .
+If no such combinations are found then return False.
+Code
+class Solution:
+
+def isPrefixString(self, s: str, words: List[str]) -> bool:
+    res=''
+    for i in words:
+        res+=i
+        if res==s:
+            return True
+        elif len(res)>len(s):
+            return False
+    return False
+Complexity
+Time Complexity:
+
+Building res step by step requires copying strings each time (since Python strings are immutable).
+
+Worst case: total length of concatenation ≤ len(s).
+
+So Time Complexity = O(n) where n = len(s).
+
+Space Complexity:
+
+Only extra storage is res and a few variables.
+
+Space Complexity = O(n) (for res).
+(extra space for strings of length ≤ 9).
