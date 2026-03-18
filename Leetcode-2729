@@ -1,0 +1,54 @@
+Leetcode-2729.-Check-if-The-Number-is-Fascinating
+Description
+You are given an integer n that consists of exactly 3 digits.
+
+We call the number n fascinating if, after the following modification, the resulting number contains all the digits from 1 to 9 exactly once and does not contain any 0's:
+
+Concatenate n with the numbers 2 * n and 3 * n. Return true if n is fascinating, or false otherwise.
+
+Concatenating two numbers means joining them together. For example, the concatenation of 121 and 371 is 121371.
+
+Solution
+In the given problem we have been given an integer number n , we have to find whether it is a fascinating number or not by Concatenating n with the numbers 2 * n and 3 * n.
+
+If the number n is fascinating then it must contain all the digits from 1 to 9 exactly once and does not contain any 0's.Return true if it follows the given condition else return false.
+
+Example 1:
+
+Input: n = 192
+
+Output: true
+
+Explanation: We concatenate the numbers n = 192 and 2 * n = 384 and 3 * n = 576. The resulting number is 192384576. This number contains all the digits from 1 to 9 exactly once.
+
+Example 2:
+
+Input: n = 100
+
+Output: false
+
+Explanation: We concatenate the numbers n = 100 and 2 * n = 200 and 3 * n = 300. The resulting number is 100200300. This number does not satisfy any of the conditions.
+
+Algorithm
+Create a string res and concatenate str(n)+str(2n)+str(3n) in it .
+Sort the resulting string .
+Check if it is equal to '123456789' i.e it contains all the numbers from 1 to 9 . If it does then return True.
+Else return False.
+Code
+class Solution:
+
+def isFascinating(self, n: int) -> bool:
+    
+    res=str(n)+str(2*n)+str(3*n)
+    sorted_res=''.join(sorted(res))
+    if sorted_res=='123456789':
+        return True
+    return False
+Complexity
+Time Complexity: O(1)
+
+(because input size is bounded — at most 9 digits).
+
+Space Complexity: O(1)
+
+(extra space for strings of length ≤ 9).
