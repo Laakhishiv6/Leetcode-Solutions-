@@ -1,0 +1,72 @@
+
+Leetcode-374.-Guess-Number-Higher-or-Lower
+Description
+We are playing the Guess Game. The game is as follows:
+
+I pick a number from 1 to n. You have to guess which number I picked.
+
+Every time you guess wrong, I will tell you whether the number I picked is higher or lower than your guess.
+
+You call a pre-defined API int guess(int num), which returns three possible results:
+
+-1: Your guess is higher than the number I picked (i.e. num > pick). 1: Your guess is lower than the number I picked (i.e. num < pick). 0: your guess is equal to the number I picked (i.e. num == pick). Return the number that I picked.
+
+Solution
+In the given game :
+
+There's a number between 1 and n .
+We have been provided a function guess(num) which will tell whether the number is too high , too low , or the exact number.
+Our aim is to find the number
+For this the most efficient search algorithnm is binary search algorithm which operates by repeatedly dividing the search space based on whether the key to be searched is greater than the mid element or lesser than the mid element.
+Example 1:
+
+Input: n = 10, pick = 6
+
+Output: 6
+
+Example 2:
+
+Input: n = 1, pick = 1
+
+Output: 1
+
+Algorithm
+Create 2 pointers l and r which are abbreviated as left and right.Intialise l as 0 and r as n(length of the array).
+Use while loop until l<=r.
+Find the mid index by adding l & r and dividing it by 2 . (l+r)//2.
+If the hidden number is smaller than mid, then update r = mid - 1.
+If the hidden number is greater than mid, then update l = mid + 1.
+If the hidden number is equal to mid, return mid as the correct answer.
+Code
+class Solution:
+
+def guessNumber(self, n: int) -> int:
+    res=0
+    l,r=0,n
+    while l<=r:
+        mid=(l+r)//2
+        res=guess(mid)
+        if res<0:
+            r=mid-1
+        elif res>0:
+            l=mid+1
+        else:
+            return mid
+Complexity
+Time Complexity:
+
+Each time you check the middle (mid), you eliminate half of the search range.
+
+Example: If n = 1000, after 1 step → 500 left, after 2 steps → 250 left, then 125, 62, … until 1.
+
+This halving process takes about log₂(n) steps.
+
+So the algorithm runs in O(log n) time.
+
+Space Complexity:
+
+You are only using a few variables: l, r, mid, and res.
+
+No extra data structures are created.
+
+So the space usage is constant → O(1). Input: n = 2, pick = 1 Output: 1
