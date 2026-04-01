@@ -1,0 +1,70 @@
+Leetcode-58.-Length-of-Last-Word
+Description
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+A word is a maximal substring consisting of non-space characters only.
+
+Solution
+Given a string s consisting of words and spaces, return the length of the last word in the string. A word is defined as a maximal substring consisting of non-space characters only.
+
+To find the length of the last word:
+
+We don’t care about trailing spaces at the end.
+
+Once those are skipped, we just need to count characters until we hit another space or reach the start of the string.
+
+This means we can scan backwards from the end of the string, first skipping spaces, then counting characters of the last word.
+
+Example 1:
+
+Input: s = "Hello World"
+
+Output: 5
+
+Explanation: The last word is "World" with length 5.
+
+Example 2:
+
+Input: s = " fly me to the moon "
+
+Output: 4
+
+Explanation: The last word is "moon" with length 4.
+
+Example 3:
+
+Input: s = "luffy is still joyboy"
+
+Output: 6
+
+Explanation: The last word is "joyboy" with length 6.
+
+Algorithm
+Initialize an index i to point at the last character of s.
+Skip all trailing spaces by moving i leftwards.
+Initialize a counter length = 0.
+While i >= 0 and s[i] is not a space: Increment length.
+Move i leftwards.
+Return length.
+Code
+class Solution:
+
+def lengthOfLastWord(self, s: str) -> int:
+    i=len(s)-1
+    length=0
+
+    while s[i]==' ':
+        i-=1
+
+    while s[i]!=' ' and i>=0:
+        length+=1
+        i-=1
+    return length
+Complexity
+Time Complexity:
+
+O(n) → In the worst case, we may scan the entire string once.
+
+Space Complexity:
+
+O(1) → We only use a few variables regardless of input size.
