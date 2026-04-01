@@ -1,0 +1,70 @@
+Leetcode-724.-Find-Pivot-Index
+Description
+Given an array of integers nums, calculate the pivot index of this array.
+
+The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+
+If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+
+Return the leftmost pivot index. If no such index exists, return -1.
+
+Solution
+In the given problem we have been given integer array nums , we need to find a pivot index . A pivot index is the index in the array where the sum of all number to the right of it is equal to the sum of all numbers to its left .
+
+This can be done by using a single pointer which loops from left to right and keeps on adding/totaling the elements . In every step we can find the right and left values to a given index by :
+
+a. Create a variable total which stores the sum of the array. b. Leftsum:The values added till the ith index can all the called as the leftsum of the array. c. rightsum: If we subtract leftsum and nums[i](which is the pivot index) from total we will get rightsum value.
+
+Example 1:
+
+Input: nums = [1,7,3,6,5,6]
+
+Output: 3
+
+Explanation: The pivot index is 3. Left sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11 Right sum = nums[4] + nums[5] = 5 + 6 = 11
+
+Example 2:
+
+Input: nums = [1,2,3]
+
+Output: -1
+
+Explanation: There is no index that satisfies the conditions in the problem statement. Example 3:
+
+Input: nums = [2,1,-1]
+
+Output: 0
+
+Explanation: The pivot index is 0. Left sum = 0 (no elements to the left of index 0) Right sum = nums[1] + nums[2] = 1 + -1 = 0
+
+Algorithm
+Create a variable total which = sum(nums)
+Create a variable leftsum which will be storing the leftsum value, initialise it as 0.
+Loop through the array .
+For each iteration calculate the rightsum : total-leftsum-nums[i]
+Also check if the rightsum==leftsum.
+If it is equal then return the i as the pivot index
+Else continue adding elements to the leftsum to find other solutions
+Return -1 , if not found.
+Code
+class Solution:
+
+def pivotIndex(self, nums: List[int]) -> int:
+    total=sum(nums)
+    leftsum=0
+
+    for i in range(len(nums)):
+        rightsum=total-nums[i]-leftsum
+        if rightsum==leftsum:
+            return i
+        else:
+            leftsum+=nums[i]
+    return -1
+Complexity
+Time Complexity:
+
+O(n) -> Because we are looping through the array once.
+
+Space Complexity:
+
+O(1) ->Variables like leftsum , total,rightsum are storing integer values.
