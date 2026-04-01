@@ -1,0 +1,51 @@
+Leetcode-27.-Remove-Element
+Description
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums. Return k.
+
+Solution
+In the given probelm we have been given an array nums and an integer value val .We need to return the value of the new array formed by removing all th values of val from the given array.
+
+Example 1:
+
+Input: nums = [3,2,2,3], val = 3
+
+Output: 2, nums = [2,2,,]
+
+Explanation: The length of the array after removed all occurrences of val 3 from the array is 2.
+
+Example 2:
+
+Input: nums = [0,1,2,2,3,0,4,2], val = 2
+
+Output: 5, nums = [0,1,4,0,3,,,_]
+
+Explanation: The length of the array after removed all occurrences of val 2 from the array is 5.
+
+Algorithm
+Create a variable l which acts as a pointer for the position to place the next kept element.
+Loop through the array and check whether the current number is not equal to val.
+If it is not equal to val then assign nums[l] to nums[i] and move l forward.
+At the end, l is the length of the new array without val
+Code
+class Solution:
+
+def removeElement(self, nums: List[int], val: int) -> int:
+    l=0
+    for i in range(len(nums)):
+        
+        if nums[i]!=val:
+            nums[l]=nums[i]
+            l+=1
+    return l
+Complexity
+The time complexity of this code is O(n) because:
+
+It loops through the array once (while left < right), adjusting pointers without any nested iteration.
+
+The space complexity is O(1) because:
+
+It uses only a few variables (left, right, and total) regardless of input size.
