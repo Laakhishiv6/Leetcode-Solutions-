@@ -1,0 +1,71 @@
+Leetcode-345.-Reverse-Vowels-of-a-String
+Description
+Given a string s, reverse only all the vowels in the string and return it.
+
+The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once
+
+Solution
+Vowels are special alphabets :'a', 'e', 'i', 'o', and 'u'.
+
+We have been given a string s and our aim is to reverse the string in which vowels will be swapped or reversed . Meanwhile the rest of the elements remains in place.
+
+Example:
+
+Input: s = "IceCreAm"
+
+Output: "AceCreIm"
+
+Explanation:
+
+The vowels in s are ['I', 'e', 'e', 'A']. On reversing the vowels, s becomes "AceCreIm".
+
+Algorithm
+Initialise 2 pointers l and r as 0 and len(nums)-1 respectively.
+Create a set of vowels consisting of both uppercase and lowercase characters.
+Convert the string s to list so that we can perform operations on each character individually.
+Use a while loop until l<r
+If the right pointer character is not in vowels set ,then decrement r by 1 to search for other vowels.
+If the left pointer character is not in vowels set ,then increment l by 1 to search for other vowels.
+Else swap the r and l characters . Increment l by 1 , decrement r by 1.
+Now when all operatiosn are done , join the list again to a string.
+Code
+class Solution:
+
+def reverseVowels(self, s: str) -> str:
+    vowels={'a', 'e', 'i', 'o','u','A','E','I','O','U'}
+    l=0
+    r=len(s)-1
+    s=list(s)
+    while l<=r:
+        
+        if s[l] not in vowels:
+            l+=1
+        elif s[r] not in vowels:
+            r-=1
+        else :
+            s[l],s[r]=s[r],s[l]
+            l+=1
+            r-=1
+    return "".join(s)
+Complexity
+Time Complexity:
+
+Each character of the string is checked at most once by either the left (l) or right (r) pointer.
+
+Even though there are some if checks, they are constant-time operations (O(1)).
+
+Hence, the overall time complexity is:
+
+O(n)
+
+where n = length of the string.
+
+Space Complexity:
+
+We convert the string into a list to allow swapping → requires O(n) extra space.
+
+The vowels set is constant in size (10 elements: 5 lowercase + 5 uppercase), so that’s O(1) space.
+
+So the total space complexity is:
+
+O(n)
