@@ -1,0 +1,57 @@
+Leetcode-151.-Reverse-Words-in-a-String
+Description
+Given an input string s, reverse the order of the words.
+
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+
+Return a string of the words in reverse order concatenated by a single space.
+
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+
+Solution
+You are given a string s that may contain extra spaces at the beginning, end, or between words. Your task is to reverse the order of words in the string. Each word should appear exactly once in the output, separated by a single space, without leading or trailing spaces.
+
+👉 Example:
+
+Input: " hello world "
+
+Output: "world hello"
+
+Algorithm
+Input: A string s.
+Trim spaces: Remove leading and trailing spaces using strip().
+Split into words: Break the string into a list of words using split().
+This automatically handles multiple spaces.
+Reverse the list: Reverse the order of words using slicing ([::-1]) or reverse().
+Code
+class Solution:
+
+def reverseWords(self, s: str) -> str:
+    s.strip()
+    words=s.split()
+    reverse=words[::-1]
+    return ' '.join(reverse)
+Complexity
+Time Complexity
+
+strip() → O(n) (traverses the string once to remove leading & trailing spaces)
+
+split() → O(n) (scans the string to split into words)
+
+[::-1] (reversing list) → O(k) (where k = number of words, but ≤ n)
+
+' '.join(words) → O(n) (joins words back with spaces)
+
+Overall: O(n)
+
+Space Complexity
+
+words list stores all words → O(n).
+
+Reversed list is also O(n).
+
+Final output string is O(n).
+
+Overall: O(n) extra space Join words: Combine the words back into a single string using " ".join(words).
+
+Return/Output: The reversed string.
