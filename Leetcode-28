@@ -1,0 +1,52 @@
+Leetcode-28.-Find-the-Index-of-the-First-Occurrence-in-a-String
+Description
+Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+Solution
+We need to find and return the index of the first occurrence of words in needle which will be found in haystack , and if we are not able to find a solution then return -1.
+
+Example: Example 1:
+
+Input: haystack = "sadbutsad", needle = "sad"
+
+Output: 0
+
+Explanation: "sad" occurs at index 0 and 6.
+
+The first occurrence is at index 0, so we return 0.
+
+Example 2:
+
+Input: haystack = "leetcode", needle = "leeto"
+
+Output: -1
+
+Explanation: "leeto" did not occur in "leetcode", so we return -1.
+
+Algorithm
+Find the length of needle and haystack and store them in m and n variables respectively.
+Loop through each n-m+1 length.
+Check whether haystack contains needle and if it contains then return the i pointer.
+Else return -1.
+Code
+class Solution:
+
+def strStr(self, haystack: str, needle: str) -> int:
+    n=len(haystack)
+    m=len(needle)
+    for i in range(n-m+1):
+        if haystack[i:i+m]==needle:
+            return i
+    return -1
+Complexity
+Time Complexity:
+
+Outer loop runs at most n - m + 1 times.
+
+Substring comparison haystack[i:i+m] == needle takes O(m) time.
+
+Worst-case → O((n - m + 1) × m) ≈ O(n × m).
+
+Space Complexity:
+
+No extra data structures → O(1).
