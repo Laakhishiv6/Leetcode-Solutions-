@@ -1,0 +1,69 @@
+Leetcode-11.-Container-With-Most-Water
+Description
+You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+Notice that you may not slant the container.
+
+Solution
+In the given problem we have to find the maximum area of water that can be filled into a container.
+
+We have been given an array of heights .
+
+Example:
+
+image
+Algorithm
+Set two pointers: l = 0 (left) and r = len(height) - 1 (right).
+Set res = 0 to store the maximum area found.
+Loop until l meets r
+Calculate width = r - l.
+Calculate container_height = min(height[l], height[r]).The area is limited by the shorter line.If we move the taller line inward, width decreases and height stays the same or decreases, so area cannot improve.Moving the shorter line might find a taller height, which could increase the area despite a smaller width.
+Calculate area = width * container_height.
+Update res = max(res, area).
+If height[l] < height[r], increment l (l += 1).
+Else, decrement r (r -= 1).
+Code
+class Solution:
+
+def maxArea(self, height: List[int]) -> int:
+    res=0
+    l,r=0,len(height)-1
+    while l<r:
+        area=(r-l)*min(height[l],height[r])
+        res=max(area,res)
+
+        if height[l]<height[r]:
+            l+=1
+        else:
+            r-=1
+    return res
+Complexity
+Time Complexity:
+
+We start with two pointers at opposite ends.
+
+In each iteration, one pointer moves inward by 1 (either l increases or r decreases).
+
+This means each pointer moves at most n-1 steps.
+
+Therefore, the loop runs O(n) times.
+
+Inside the loop, all operations (min, subtraction, multiplication, comparison) are O(1).
+
+Time Complexity: O(n)
+
+Space Complexity:
+
+We only use a few extra variables: l, r, res, area, width, container_height.
+
+These are constant in size and do not grow with input.
+
+No extra arrays or data structures are used.
+
+Space Complexity: O(1) Continue until l >= r.
+
+Return res.
